@@ -32,10 +32,9 @@ class Market
   end
 
   def total_inventory
-    all_items = @vendors.map { |vendor| vendor.inventory}.flatten
-    total_inventory = all_items.reduce do |acc, item|
-      acc[]
-      require "pry"; binding.pry
+    all_items = @vendors.map { |vendor| vendor.inventory}
+    total_inventory = all_items.each_with_object(Hash.new(0)) do |hash, acc|
+      hash.each { |key, value| acc[key] += value }
     end
     total_inventory
   end
