@@ -39,24 +39,26 @@ class ItemTest < Minitest::Test
     assert_equal [@vendor1, @vendor2, @vendor3], @market.vendors
   end
 
+  def test_it_can_return_vendor_names
+    @market.add_vendor(@vendor1)
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
+    assert_equal ["Rocky Mountain Fresh", "Ba-Nom-a-Nom", "Palisade Peach Shack"], @market.vendor_names
+  end
+
+  def test_it_can_find_specific_items_sold_by_vendors
+    @vendor1.stock(@item1, 35)
+    @vendor1.stock(@item2, 7)
+    @vendor2.stock(@item4, 50)
+    @vendor2.stock(@item3, 25)
+    @vendor3.stock(@item1, 65)
+    @market.add_vendor(@vendor1)
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
+
+    assert_equal [@vendor1, @vendor3], @market.vendors_that_sell(@item1)
+
+    assert_equal [@vendor2], @market.vendors_that_sell(@item4)
+  end
 
 end
-
-# vendor1.stock(item1, 35)
-#
-# vendor1.stock(item2, 7)
-#
-# vendor2.stock(item4, 50)
-#
-# vendor2.stock(item3, 25)
-##
-# vendor3.stock(item1, 65)
-#
-# market.vendor_names
-# #=> ["Rocky Mountain Fresh", "Ba-Nom-a-Nom", "Palisade Peach Shack"]
-#
-# market.vendors_that_sell(item1)
-# #=> [#<Vendor:0x00007fe1348a1160...>, #<Vendor:0x00007fe134910650...>]
-#
-# market.vendors_that_sell(item4)
-# #=> [#<Vendor:0x00007fe1349bed40...>]
