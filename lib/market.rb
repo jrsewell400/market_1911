@@ -27,6 +27,17 @@ class Market
   end
 
   def sorted_item_list
-
+    all_items = @vendors.map { |vendor| vendor.inventory.keys }.flatten
+    all_items.map { |item| item.name }.uniq.sort
   end
+
+  def total_inventory
+    all_items = @vendors.map { |vendor| vendor.inventory}.flatten
+    total_inventory = all_items.reduce do |acc, item|
+      acc[]
+      require "pry"; binding.pry
+    end
+    total_inventory
+  end
+
 end
