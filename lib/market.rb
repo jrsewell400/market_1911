@@ -4,6 +4,7 @@ class Market
   def initialize(name)
     @name = name
     @vendors = []
+    @in_stock = false
   end
 
   def add_vendor(vendor_name)
@@ -37,6 +38,10 @@ class Market
       hash.each { |key, value| acc[key] += value }
     end
     total_inventory
+  end
+
+  def sell(item, quanity)
+
   end
 
 end
