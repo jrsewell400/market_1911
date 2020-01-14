@@ -61,4 +61,29 @@ class ItemTest < Minitest::Test
     assert_equal [@vendor2], @market.vendors_that_sell(@item4)
   end
 
+  def test_it_can_sort_item_names
+    # #
+    # pry(main)> vendor1.stock(item1, 35)
+    #
+    # pry(main)> vendor1.stock(item2, 7)
+    #
+    # pry(main)> vendor2.stock(item4, 50)
+    #
+    # pry(main)> vendor2.stock(item3, 25)
+    #
+    # pry(main)> vendor3.stock(item1, 65)
+    #
+    # pry(main)> market.add_vendor(vendor1)
+    #
+    # pry(main)> market.add_vendor(vendor2)
+    #
+    # pry(main)> market.add_vendor(vendor3)
+    #
+    # pry(main)> market.sorted_item_list
+    # #=> ["Banana Nice Cream", "Peach", "Peach-Raspberry Nice Cream", "Tomato"]
+  end
+
 end
+
+# pry(main)> market.total_inventory
+# #=> {#<Item:0x007f9c56740d48...> => 100, #<Item:0x007f9c565c0ce8...> => 7, #<Item:0x007f9c56343038...> => 50, #=> #<Item:0x007f9c562a5f18...> => 25}

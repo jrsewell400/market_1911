@@ -25,4 +25,8 @@ class Market
     end
     vendors_that_sell
   end
+
+  def sorted_item_list
+
+  end
 end
