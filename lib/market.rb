@@ -4,7 +4,6 @@ class Market
   def initialize(name)
     @name = name
     @vendors = []
-    @in_stock = false
   end
 
   def add_vendor(vendor_name)
@@ -40,8 +39,18 @@ class Market
     total_inventory
   end
 
-  def sell(item, quanity)
-
+  def sell(item_obj, quantity)
+    in_stock = nil
+    all_items = @vendors.map { |vendor| vendor.inventory}
+    total_inventory = all_items.each_with_object(Hash.new(0)) do |hash, acc|
+      hash.each { |key, value| acc[key] += value }
+    end
+    total_inventory.each do |item|
+      if item[0] == item_obj && item[1] < quantity
+        in_stock = false
+      end
+    end
+    in_stock
   end
 
 end

@@ -92,11 +92,18 @@ class ItemTest < Minitest::Test
 
   def test_sell_method_returns_false_if_not_enough_of_item_is_in_stock
     item1 = Item.new({name: 'Peach', price: "$0.75"})
+    item2 = Item.new({name: 'Tomato', price: '$0.50'})
+    item4 = Item.new({name: "Banana Nice Cream", price: "$4.25"})
     market = Market.new("South Pearl Street Farmers Market")
     vendor1 = Vendor.new("Rocky Mountain Fresh")
+    vendor2 = Vendor.new("Ba-Nom-a-Nom")
+    market.add_vendor(vendor1)
+    market.add_vendor(vendor2)
     vendor1.stock(item1, 35)
+    vendor1.stock(item2, 7)
+    vendor2.stock(item4, 50)
 
-    assert_equal false, @market.sell(@item1, 40)
+    assert_equal false, market.sell(item1, 40)
   end
 
 
